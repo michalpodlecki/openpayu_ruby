@@ -42,7 +42,7 @@ module OpenPayU
         hash.each_pair do |k, v|
           attrs[k.camelize(:lower)] =
             if v.is_a? Array
-              { k.camelize(:lower) =>  v.map(&:prepare_keys) }
+              v.map(&:prepare_keys)
             elsif v.class.name =~ /OpenPayU::Models/
               v.prepare_keys
             else
@@ -75,7 +75,12 @@ module OpenPayU
       end
 
       def to_flatten_hash(source = nil, target = {}, namespace = nil, index = nil)
+        # was_nil = source
         source ||= prepare_keys(instance_values)
+        # if was_nil.nil?
+        #   puts 'source:'
+        #   puts source.inspect
+        # end
         prefix = "#{namespace}." if namespace
         case source
         when Hash

@@ -10,7 +10,7 @@ module OpenPayU
     class << self
       attr_accessor :env, :merchant_pos_id, :pos_auth_key, :client_id,
         :client_secret, :signature_key, :service_domain, :country, :data_format,
-          :algorithm, :protocol, :order_url, :notify_url, :complete_url
+          :algorithm, :protocol, :order_url, :notify_url, :continue_url
 
       def configure(file_path = nil)
         set_defaults
@@ -51,7 +51,7 @@ module OpenPayU
       end
 
       def get_base_url
-        "#{@protocol}://#{@env}.#{@service_domain}/api/v2/"
+        "#{@protocol}://#{@env}.#{@service_domain}/api/v2_1/"
       end
 
       def use_ssl?

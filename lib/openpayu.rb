@@ -52,14 +52,16 @@ module OpenPayU
   def self.hosted_order_form(order)
     @order = Models::Order.new(order)
     render_hash = @order.to_flatten_hash
+    puts 'render_hash:'
+    puts render_hash.inspect
     html_form = "<form method='post' " +
-      "action='#{Configuration.get_base_url}order'>\n"
+      "action='#{Configuration.get_base_url}orders'>\n"
     render_hash.each do |key, value|
       html_form << "<input type='hidden' name='#{key}' value='#{value}' />\n"
     end
 
     html_form << "<input type='hidden' name='OpenPayu-Signature'
       value='#{sign_form(render_hash)}' />
-        <button type='submit' formtarget='_blank' />\n</form>"
+        <button type='submit' formtarget='_blank'>Płacę z PayU</button></form>"
   end
 end
