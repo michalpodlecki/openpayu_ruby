@@ -37,8 +37,10 @@ module OpenPayU
         raise EmptyResponseError,
               "Got empty response from request: #{@request.try(:body)}"
       end
-      if ( response.is_a?(OpenPayU::Documents::Request) ||
-            %w(200 201 422 302).include?(response.code)) 
+      if @response.is_a?(ActionDispatch::Request)
+        true
+      elsif ( @response.is_a?(OpenPayU::Documents::Request) ||
+            %w(200 201 422 302).include?(@response.code))
         true
       else
         raise HttpStatusException,

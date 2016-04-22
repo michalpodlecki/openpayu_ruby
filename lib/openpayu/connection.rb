@@ -14,9 +14,6 @@ module OpenPayU
       request.body = data
       request['Content-Type'] =
         "application/#{OpenPayU::Configuration.data_format}"
-      puts 'data:'
-      puts data
-      puts '---'
       response = http.request(request)
       { response: response, request: request }
     end
