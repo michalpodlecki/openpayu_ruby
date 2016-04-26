@@ -63,6 +63,7 @@ module OpenPayU
             end
           elsif v.class.name =~ /OpenPayU::Models/
             @all_errors[v.class.name] = v.errors unless v.valid?
+            @all_errors.merge!(v.validate_all_objects)
           end
         end
         @all_errors[self.class.name] = errors unless valid?
@@ -75,12 +76,7 @@ module OpenPayU
       end
 
       def to_flatten_hash(source = nil, target = {}, namespace = nil, index = nil)
-        # was_nil = source
         source ||= prepare_keys(instance_values)
-        # if was_nil.nil?
-        #   puts 'source:'
-        #   puts source.inspect
-        # end
         prefix = "#{namespace}." if namespace
         case source
         when Hash
