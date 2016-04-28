@@ -16,4 +16,8 @@ class WrongOrderParameters < StandardError
       "Class #{k} missing attributes: #{v.messages.inspect}"
     end
   end
+
+  def errors
+    @order.all_errors
+  end
 end
