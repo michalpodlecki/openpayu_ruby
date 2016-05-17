@@ -6,6 +6,7 @@ class WrongSignatureException < StandardError; end
 class WrongNotifyRequest < StandardError; end
 class NotImplementedException < StandardError; end
 class WrongOrderParameters < StandardError
+  attr_reader :order
 
   def initialize(order)
     @order = order
@@ -15,9 +16,5 @@ class WrongOrderParameters < StandardError
     @order.all_errors.map do |k, v|
       "Class #{k} missing attributes: #{v.messages.inspect}"
     end
-  end
-
-  def errors
-    @order.all_errors
   end
 end

@@ -58,15 +58,15 @@ module OpenPayU
           if v.is_a? Array
             v.each do |element|
               if element.validate_all_objects.any?
-                @all_errors[element.class.name] = element.errors
+                @all_errors[element.class.name] = element.errors.full_messages
               end
             end
           elsif v.class.name =~ /OpenPayU::Models/
-            @all_errors[v.class.name] = v.errors unless v.valid?
+            @all_errors[v.class.name] = v.errors.full_messages unless v.valid?
             @all_errors.merge!(v.validate_all_objects)
           end
         end
-        @all_errors[self.class.name] = errors unless valid?
+        @all_errors[self.class.name] = errors.full_messages unless valid?
 
         @all_errors
       end
