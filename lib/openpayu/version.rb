@@ -1,4 +1,4 @@
 # -*- encoding : utf-8 -*-
 module OpenPayU
-  VERSION = '0.1.3.0'
+  VERSION = '0.1.4.0'
 end
